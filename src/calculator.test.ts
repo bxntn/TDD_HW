@@ -43,3 +43,37 @@ test('//|\n1|2,3',()=>{
         Add("//|\n1|2,3")
     }).toThrow("‘|’ expected but ‘,’ found at position 3.");
 });
+
+test('1,-2',()=>{
+    expect(()=>{
+        Add("1,-2")
+    }).toThrow("Negative number(s) not allowed: -2");
+});
+
+test('2,-4,-9',()=>{
+    expect(()=>{
+        Add("2,-4,-9")
+    }).toThrow("Negative number(s) not allowed: -4, -9");
+});
+
+test('//|\n1|2,-3',()=>{
+    expect(()=>{
+        Add("//|\n1|2,-3")
+    }).toThrow("Negative number(s) not allowed: -3\n‘|’ expected but ‘,’ found at position 3.");
+});
+
+test('2,1001',()=>{
+    expect(Add("2,1001")).toBe(2)
+});
+
+test('//|\n1|23,-34',()=>{
+    expect(()=>{
+        Add("//|\n1|23,-34")
+    }).toThrow("Negative number(s) not allowed: -34\n‘|’ expected but ‘,’ found at position 4.");
+});
+
+// test('//|\n1|23sep-34',()=>{
+//     expect(()=>{
+//         Add("//|\n1|23sep-34")
+//     }).toThrow("Negative number(s) not allowed: -34\n‘|’ expected but ‘sep’ found at position 4.");
+// });
